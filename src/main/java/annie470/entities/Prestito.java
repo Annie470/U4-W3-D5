@@ -9,8 +9,8 @@ import java.util.Scanner;
 @Entity
 public class Prestito {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id; //ha piu senso che un uuid, cos' si puo vedere il numero di prestiti progressivo :)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "utente_id")

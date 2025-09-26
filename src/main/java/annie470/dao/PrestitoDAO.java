@@ -108,4 +108,19 @@ public class PrestitoDAO {
         }
     }
 
+    public void elencarePScaduti(){
+        TypedQuery<Prestito> query = entityManager.createQuery(
+                "SELECT p FROM Prestito p WHERE p.dataRestituzioneEffettiva IS NULL",
+                Prestito.class
+        );
+        List<Prestito> prestitiAttivi = query.getResultList();
+        List<Prestito> prestitiScaduti = prestitiAttivi.stream().filter(prestito -> prestito.getDataRestituzionePrevista().isBefore(LocalDate.now())).toList();
+
+        if(prestitiScaduti.isEmpty()){
+            System.out.println("Non sono presenti prestiti scaduti");
+        }
+        prestitiScaduti.forEach(System.out::println);
+
+    }
+
 }

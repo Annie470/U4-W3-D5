@@ -33,7 +33,7 @@ public class Application {
         System.out.print( "BENVENUTO IN"+GIALLO +" ZILLA-LIB"+ RESET+"!" ); //è solo il continuo della zillalib del frontend xD
         do {
             try {
-                System.out.println("\nInserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n5 -> CREARE NUOVO PRESTITO\n6 -> RESTITUIRE DAL PRESTITO\n7 -> RICERCARE PER ANNO\n8 -> RICERCARE PER AUTORE\n9 -> RICERCARE PER TITOLO\n10 -> RICERECA PRESTITO ATTIVO\n99 -> TERMINARE");
+                System.out.println("\nInserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n5 -> CREARE NUOVO PRESTITO\n6 -> RESTITUIRE DAL PRESTITO\n7 -> RICERCARE PER ANNO\n8 -> RICERCARE PER AUTORE\n9 -> RICERCARE PER TITOLO\n10 -> RICERECA PRESTITO ATTIVO\n11 -> ELENCO PRESTITI SCADUTI\n99 -> TERMINARE");
                 int scelta = Integer.parseInt(scanner.nextLine());
                 switch (scelta) {
                     case 1:
@@ -86,6 +86,9 @@ public class Application {
                         break;
                     case 10:
                         prd.elencarePAttivi(scanner);
+                        break;
+                    case 11:
+                        prd.elencarePScaduti();
                         break;
                     case 99:
                         System.out.println("TERMINALE CHIUSO");
