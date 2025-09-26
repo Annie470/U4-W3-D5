@@ -9,7 +9,7 @@ import java.util.Scanner;
 @Entity
 public class Prestito {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
