@@ -4,13 +4,12 @@ import annie470.entities.ElementoCollezione;
 import annie470.entities.Prestito;
 import annie470.entities.Utente;
 import annie470.exceptions.ElementoNonTrovatoException;
-import annie470.exceptions.InputNonValidoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -91,4 +90,22 @@ public class PrestitoDAO {
             System.out.println(ex.getMessage());
         }
     }
+
+    public void elencarePAttivi(Scanner scanner) {
+        try {
+            System.out.println("Inserire tessera ID utente: ");
+            UUID tesseraId = UUID.fromString(scanner.nextLine());
+            TypedQuery<Prestito> query = entityManager.createQuery("SELECT p FROM Prestito p WHERE p.utente.tessera_id = :tesseraId AND p.dataRestituzioneEffettiva IS NULL", Prestito.class);
+            query.setParameter("tesseraId", tesseraId);
+            List<Prestito> prestiti = query.getResultList();
+            if (prestiti.isEmpty()) {
+                System.out.println("Non ci sono prestiti attivi");
+            } else {
+                prestiti.forEach(System.out::println);
+            }
+        } catch (Exception e) {
+            System.out.println("ID TESSERA ERRATO");
+        }
+    }
+
 }
