@@ -7,6 +7,7 @@
         <class>annie470.entities.Libro</class>
         <class>annie470.entities.Rivista</class>
         <class>annie470.entities.Utente</class>
+        <class>annie470.entities.Prestito</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbZillaLib"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>

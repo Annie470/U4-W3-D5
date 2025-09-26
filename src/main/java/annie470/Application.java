@@ -1,6 +1,7 @@
 package annie470;
 
 import annie470.dao.ElementoCollezioneDAO;
+import annie470.dao.PrestitoDAO;
 import annie470.dao.UtenteDAO;
 import annie470.entities.*;
 import annie470.exceptions.ElementoNonTrovatoException;
@@ -13,10 +14,14 @@ import java.util.Scanner;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbzillapu");
+    public static final String GIALLO = "\u001B[33m";
+    public static final String RESET = "\u001B[0m"; // ma come mi diverto... io sola
+
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
         ElementoCollezioneDAO eld = new ElementoCollezioneDAO(em);
         UtenteDAO ud= new UtenteDAO(em);
+        PrestitoDAO prd = new PrestitoDAO(em);
         Scanner scanner = new Scanner(System.in);
 
         /*Libro l1 =new Libro("Fondazione",1963, 1476, "Isaac Asimov", Genere.FANTASCIENZA );
@@ -25,9 +30,10 @@ public class Application {
         eld.save(r1);
 
         System.out.println("TUTTO OK");*/
+        System.out.print( "BENVENUTO IN"+GIALLO +" ZILLA-LIB"+ RESET+"!" ); //è solo il continuo della zillalib del frontend xD
         do {
             try {
-                System.out.println("Inserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n9 -> TERMINARE");
+                System.out.println("\nInserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n5 -> CREARE NUOVO PRESTITO\n6 -> RESTITUIRE DAL PRESTITO\n7 -> RICERCARE PER ANNO\n9 -> TERMINARE");
                 int scelta = Integer.parseInt(scanner.nextLine());
                 switch (scelta) {
                     case 1:
@@ -62,6 +68,15 @@ public class Application {
                         }
                     case 4:
                         ud.creaSalva(scanner);
+                        break;
+                    case 5:
+                        prd.creaSalva(scanner, eld);
+                        break;
+                    case 6:
+                        prd.restituisciPrestito(scanner, em);
+                        break;
+                    case 7:
+                        eld.ricercarePerAnno(scanner);
                         break;
                     case 9:
                         System.out.println("TERMINALE CHIUSO");

@@ -5,7 +5,9 @@ import annie470.exceptions.ElementoNonTrovatoException;
 import annie470.exceptions.InputNonValidoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -119,6 +121,25 @@ public class ElementoCollezioneDAO {
                     System.out.println("INSERISCI SOLO 1, 2 , 9");
                     break;
             }
+        }
+    }
+
+    public void ricercarePerAnno(Scanner scanner) {
+        try {
+            System.out.println("Inserisci anno di pubblicazione:");
+            int anno = Integer.parseInt(scanner.nextLine());
+            TypedQuery<ElementoCollezione> query = entityManager.createQuery("SELECT e FROM ElementoCollezione e WHERE e.annoPubblicazione = :anno", ElementoCollezione.class);
+            query.setParameter("anno", anno);
+
+            List<ElementoCollezione> risultati = query.getResultList();
+            if (risultati.isEmpty()) {
+                System.out.println("Nessun libro o rivista ha questo anno di pubblicazione");
+            } else {
+                System.out.println("Elementi trovati per l'anno: " + risultati.size());
+                risultati.forEach(System.out::println);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("INSERISCI SOLO NUMERI");
         }
     }
 }
