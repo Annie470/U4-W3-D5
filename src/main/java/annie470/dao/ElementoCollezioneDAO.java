@@ -25,12 +25,16 @@ public class ElementoCollezioneDAO {
     }
 
     public ElementoCollezione getById(String id) {
-        UUID uuid = UUID.fromString(id);
-        ElementoCollezione elTrovato = entityManager.find(ElementoCollezione.class, uuid);
-        if (elTrovato == null) {
+        try {
+            UUID uuid = UUID.fromString(id);
+            ElementoCollezione elTrovato = entityManager.find(ElementoCollezione.class, uuid);
+            if (elTrovato == null) {
+                throw new ElementoNonTrovatoException("ELEMENTO NON PRESENTE IN DB O ID NON CORRETTO");
+            }
+            return elTrovato;
+        }  catch (IllegalArgumentException e) {
             throw new ElementoNonTrovatoException("ELEMENTO NON PRESENTE IN DB O ID NON CORRETTO");
-        }
-        return  elTrovato;
+    }
     };
 
     public void delete(String id) {
