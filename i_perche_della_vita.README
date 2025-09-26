@@ -1,0 +1,5 @@
+1)ElementoCollezione è abstract con classi figlie (INHERITANCE STRATEGY TABLE_PER_CLASS)
+Strategia scelta per sfruttare sia polimorfismo su ElementoCollezione (usare un unico DAO per le classi figlie)
+sia perchè il db risultava piu gestibile, meno frammentato  (no table aggiuntive).
+2)Prestito è collegato con annotazioni @ManyToOne sia a utente Id che a elementoCollezione Id (Libro o Rivista).
+"Una persona può avere molti prestiti, un libro o rivista può essere prestato più volte)

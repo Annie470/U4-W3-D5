@@ -38,8 +38,8 @@ public class ElementoCollezioneDAO {
     };
 
     public void delete(String id) {
-        UUID uuid = UUID.fromString(id);
-        ElementoCollezione elT = this.getById(String.valueOf(uuid));
+        //UUID uuid = UUID.fromString(id);
+        ElementoCollezione elT = this.getById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(elT);
