@@ -142,4 +142,32 @@ public class ElementoCollezioneDAO {
             System.out.println("INSERISCI SOLO NUMERI");
         }
     }
+
+    public void ricercarePerAutore(Scanner scanner){
+        System.out.println("Inserisci autore:");
+        String autore = scanner.nextLine();
+        TypedQuery<ElementoCollezione> query = entityManager.createQuery("SELECT e FROM ElementoCollezione e WHERE LOWER(e.autore) LIKE LOWER(:autore)", ElementoCollezione.class).setParameter("autore", "%" + autore + "%");
+        // grazie % che non sapevo dove metterti e mi hai fatto perdere mezz'ora
+
+        List<ElementoCollezione> risultati = query.getResultList();
+        if (risultati.isEmpty()) {
+            System.out.println("Nessun libro ha questo autore");
+        } else {
+            System.out.println("Elementi trovati: " + risultati.size());
+            risultati.forEach(System.out::println);
+        }
+    }
+
+    public  void ricercarePerTitolo(Scanner scanner){
+        System.out.println("Inserisci titolo:");
+        String titolo = scanner.nextLine();
+        TypedQuery<ElementoCollezione> query = entityManager.createQuery("SELECT e FROM ElementoCollezione e WHERE LOWER(e.titolo) LIKE LOWER(:titolo)", ElementoCollezione.class).setParameter("titolo", "%" + titolo + "%");
+        List<ElementoCollezione> risultati = query.getResultList();
+        if (risultati.isEmpty()) {
+            System.out.println("Nessun libro o rivista ha questo titolo");
+        } else {
+            System.out.println("Elementi trovati: " + risultati.size());
+            risultati.forEach(System.out::println);
+        }
+    }
 }

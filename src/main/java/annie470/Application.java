@@ -33,7 +33,7 @@ public class Application {
         System.out.print( "BENVENUTO IN"+GIALLO +" ZILLA-LIB"+ RESET+"!" ); //è solo il continuo della zillalib del frontend xD
         do {
             try {
-                System.out.println("\nInserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n5 -> CREARE NUOVO PRESTITO\n6 -> RESTITUIRE DAL PRESTITO\n7 -> RICERCARE PER ANNO\n9 -> TERMINARE");
+                System.out.println("\nInserisci:\n1 -> AGGIUNGERE ELEMENTO LIBRO O RIVISTA\n2 -> RICERCARE PER ISBN\n3 -> ELIMINARE DAL CATALOGO\n4 -> AGGIUNGERE NUOVO UTENTE\n5 -> CREARE NUOVO PRESTITO\n6 -> RESTITUIRE DAL PRESTITO\n7 -> RICERCARE PER ANNO\n8 -> RICERCARE PER AUTORE\n9 -> RICERCARE PER TITOLO\n99 -> TERMINARE");
                 int scelta = Integer.parseInt(scanner.nextLine());
                 switch (scelta) {
                     case 1:
@@ -78,7 +78,13 @@ public class Application {
                     case 7:
                         eld.ricercarePerAnno(scanner);
                         break;
+                    case 8:
+                        eld.ricercarePerAutore(scanner);
+                        break;
                     case 9:
+                        eld.ricercarePerTitolo(scanner);
+                        break;
+                    case 99:
                         System.out.println("TERMINALE CHIUSO");
                         scanner.close();
                         return;
